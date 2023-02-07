@@ -3,7 +3,7 @@
 /**
  * Récupère tous les enregistrements de la table origins
  */
-function getAllOrigins()
+function getAllOrigin()
 {
     // Construction du Data Source Name
     $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
@@ -19,7 +19,7 @@ function getAllOrigins()
     $pdo->exec('SET NAMES UTF8');
 
     $sql = 'SELECT *
-            FROM origines
+            FROM origin
             ORDER BY origine_label';
 
     $query = $pdo->prepare($sql);
@@ -32,7 +32,7 @@ function getAllOrigins()
 /**
  * Ajoute un abonné à la liste des emails
  */
-function addSubscriber(string $email, string $firstName, string $lastName, int $originId)
+function addSubscriber(string $email, string $firstName, string $lastName, int $origines)
 {
     // Construction du Data Source Name
     $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
@@ -53,5 +53,5 @@ function addSubscriber(string $email, string $firstName, string $lastName, int $
             VALUES (?,?,?,?, NOW())';
 
     $query = $pdo->prepare($sql);
-    $query->execute([$email, $firstName, $lastName, $originId]);
+    $query->execute([$email, $firstName, $lastName, $origines]);
 }

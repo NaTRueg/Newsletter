@@ -50,19 +50,12 @@
                         <p class="message error"><?= $errors['nom']; ?></p>
                     <?php endif; ?>
                 </div>
-                <?php
-                    $options = array(
-                        array('value' => 'friend', 'label' => "Un ami m'en a parlé"),
-                        array('value' => 'internet', 'label' => 'Recherche sur internet'),
-                        array('value' => 'magazine', 'label' => 'Publicité dans un magazine')
-                    );
-                ?>
-
+                
                 <div class="field-list">
-                    <label for="origine">How did you find us ?</label>
-                    <select name="origine" id="origine">
-                        <?php foreach ($options as $option) : ?>
-                        <option value="<?= $option['value']; ?>"><?= $option['label']; ?></option>
+                    <label for="origin">Comment avez-vous connu notre site ?</label>
+                    <select name="origin" id="origin">
+                        <?php foreach ($origines as $origines) : ?>
+                            <option value="<?= $origines['id']; ?>"><?= $origines['origine_label']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
