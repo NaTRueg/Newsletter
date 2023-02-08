@@ -26,13 +26,22 @@ function getAllOrigin()
     $query->execute();
 
     return $query->fetchAll();
+
+    $sql = 'SELECT *
+        FROM interest
+        ORDER BY interest_label';
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    return $query->fetchAll();
+    
 }
 
 
 /**
  * Ajoute un abonné à la liste des emails
  */
-function addSubscriber(string $email, string $firstName, string $lastName, int $origines)
+function addSubscriber(string $email, string $firstName, string $lastName, int $origines, $interests)
 {
     // Construction du Data Source Name
     $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
@@ -49,9 +58,9 @@ function addSubscriber(string $email, string $firstName, string $lastName, int $
 
     // Insertion de l'email dans la table subscribers
     $sql = 'INSERT INTO subscribers
-            (email, firstName, lastName, origine_id, createThe) 
-            VALUES (?,?,?,?, NOW())';
+            (email, firstName, lastName, origine_id, createThe, interests) 
+            VALUES (?,?,?,?, NOW(),?)';
 
     $query = $pdo->prepare($sql);
-    $query->execute([$email, $firstName, $lastName, $origines]);
+    $query->execute([$email, $firstName, $lastName, $origines, $interests]);
 }

@@ -15,7 +15,7 @@ $pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$pdoStatement = $pdo->prepare('INSERT INTO subscribers (firstName , lastName, email) VALUES (?,?,?)');
+$pdoStatement = $pdo->prepare('INSERT INTO subscribers (firstName , lastName, email,interests) VALUES (?,?,?,?)');
 
 
 while ($row = fgetcsv($file)) {
@@ -24,11 +24,11 @@ while ($row = fgetcsv($file)) {
     $firstName = $row[0];
     $lastName = $row[1];
     $email = $row[2];
-    // $originId = $row[3];
+    $interests = $row[3];
 
 
   
-    $pdoStatement->execute([$firstName, $lastName,$email,]);
+    $pdoStatement->execute([$firstName, $lastName,$email,$interests]);
 }
 
 echo 'Import terminé!';
