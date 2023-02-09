@@ -42,7 +42,7 @@ if (!empty($_POST)) {
 
     // L'abonné existe déjà, affichez un message d'erreur
 
-    $errors['email'] = "L'adresse email est déjà utilisée. Veuillez en choisir une autre.";
+    $errors['email'] = "L'adresse email est déjà utilisée. <br> Veuillez en choisir une autre.";
     } else {
 
 
