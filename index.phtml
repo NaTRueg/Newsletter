@@ -61,31 +61,19 @@
                 </div>
 
                 <div class="field-list">
-                    <legend>Centres d'intérêts :</legend>
-                    <input type="checkbox" id="Peinture" name="interests" value="Peinture">
-                    <label for="Peinture">Peinture</label>
-                    <br>
-                    <input type="checkbox" id="Sculpture" name="interests" value="Sculpture">
-                    <label for="Sculpture">Sculpture</label>
-                    <br>
-                    <input type="checkbox" id="Photographie" name="interests" value="Photographie">
-                    <label for="Photographie">Photographie</label>
-                    <br>
-                    <input type="checkbox" id="Art contemporain" name="interests" value="Art contemporain">
-                    <label for="Art contemporain">Art contemporain</label>
-                    <br>
-                    <input type="checkbox" id="Films" name="interests" value="Films">
-                    <label for="Films">Films</label>
-                    <br>
-                    <input type="checkbox" id="Art numérique" name="interests" value="Art numérique">
-                    <label for="Art numérique">Art numérique</label>
-                    <br>
-                    <input type="checkbox" id="Installations" name="interests" value="Installations">
-                    <label for="Installations">Installations</label>
-                    <br>
-                    <?php foreach ($interests as $interests) : ?>
-                            <option value="<?= $interests['id']; ?>"><?= $interests['interest_label']; ?></option>
-                    <?php endforeach; ?>
+
+                <!-- <?php 
+                    if (isset($errors['interest'])) : ?>
+                    <p class="message error"><?= $errors['interest']; ?></p>
+                <?php endif; ?> -->
+
+                <?php foreach ($interestsSelected as $interests) : ?>
+
+                    <input id="interest" type="checkbox" name="interest[]" value="<?= $interests['id']; ?>" >
+                    <label for="interest"><?= $interests['interest_label']; ?></label> <br>
+
+                <?php endforeach; ?>
+                  
                 </div>
                 <input type="submit" value="Valider" class="btn">
             </fieldset>

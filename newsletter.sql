@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 08, 2023 at 03:11 PM
+-- Generation Time: Feb 09, 2023 at 01:34 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -89,12 +89,7 @@ INSERT INTO `subscribers` (`id`, `createThe`, `email`, `firstName`, `lastName`, 
 (2, NULL, 'b.lav@hotmail.fr', 'Bertrand', 'Lavoisier', NULL),
 (3, NULL, 'SarahLAMINE@gmail.com', 'Sarah', 'Lamine', NULL),
 (4, NULL, 'mo78@laposte.net', 'Mohamed', 'Ben Salam', NULL),
-(69, '2023-02-08', 'Jean@Dupont.com', 'Jean', 'Dupont', 1),
-(70, '2023-02-08', 'Jean@Dupont.com', 'Jean', 'Dupont', 3),
-(87, '2023-02-08', 'test@test.fr', 'Test', 'Dupont', 3),
-(88, '2023-02-08', 'test@test.fr', 'Test', 'Dupont', 3),
-(89, '2023-02-08', 'test@test.fr', 'Test', 'Dupont', 3),
-(90, '2023-02-08', 'test@test.fr', 'Test', 'Dupont', 3);
+(5, '2023-02-09', 'test@test.fr', 'Jean', 'Dupont', 2);
 
 -- --------------------------------------------------------
 
@@ -106,6 +101,16 @@ CREATE TABLE `subscriber_interest` (
   `subscribers_id` int NOT NULL,
   `interest_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `subscriber_interest`
+--
+
+INSERT INTO `subscriber_interest` (`subscribers_id`, `interest_id`) VALUES
+(5, 7),
+(5, 1),
+(5, 3),
+(5, 2);
 
 --
 -- Indexes for dumped tables
@@ -134,8 +139,8 @@ ALTER TABLE `subscribers`
 -- Indexes for table `subscriber_interest`
 --
 ALTER TABLE `subscriber_interest`
-  ADD PRIMARY KEY (`subscribers_id`,`interest_id`),
-  ADD KEY `interest_id` (`interest_id`);
+  ADD KEY `interest_id` (`interest_id`),
+  ADD KEY `suscriber_id` (`subscribers_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -157,7 +162,7 @@ ALTER TABLE `origin`
 -- AUTO_INCREMENT for table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -173,8 +178,8 @@ ALTER TABLE `subscribers`
 -- Constraints for table `subscriber_interest`
 --
 ALTER TABLE `subscriber_interest`
-  ADD CONSTRAINT `subscriber_interest_ibfk_1` FOREIGN KEY (`subscribers_id`) REFERENCES `subscribers` (`id`),
-  ADD CONSTRAINT `subscriber_interest_ibfk_2` FOREIGN KEY (`interest_id`) REFERENCES `interest` (`id`);
+  ADD CONSTRAINT `interest_id` FOREIGN KEY (`interest_id`) REFERENCES `interest` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `suscriber_id` FOREIGN KEY (`subscribers_id`) REFERENCES `subscribers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
