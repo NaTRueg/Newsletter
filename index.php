@@ -11,6 +11,9 @@ $email = '';
 $firstName = '';
 $lastName = '';
 
+
+$conn = mysqli_connect(DB_HOST, DB_USER , DB_PASSWORD , DB_NAME );
+
 // Si le formulaire a été soumis...
 if (!empty($_POST)) {
 
@@ -25,8 +28,22 @@ if (!empty($_POST)) {
 
     // On récupère l'origine
     $originSelected = $_POST['origin'];
-    $interests = $_POST['interest'];
+    if (isset($_POST['interest'])) {
+        $interests = $_POST['interest'];
+      } else {
+        $interests = [];
+      }
     
+    // Vérifiez si un abonné existe déjà avec la même adresse email
+    $query = "SELECT * FROM subscribers WHERE email = '$email'";
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+
+    // L'abonné existe déjà, affichez un message d'erreur
+
+    $errors['email'] = "L'adresse email est déjà utilisée. Veuillez en choisir une autre.";
+    } else {
 
 
     // Validation 
@@ -41,10 +58,13 @@ if (!empty($_POST)) {
     if (!$lastName) {
         $errors['Lastname'] = "Merci d'indiquer un nom";
     }
+    
 
-    // if (!$interests) {
-    //     $interests['interests'] = "Merci d'indiquer un centre d'intérêt";
-    // }
+    if (!isset($interests) || count($interests) == 0) {
+        $errors['interests'] = "Merci de choisir au moins un centre d'intérêt.";
+    }
+}
+
 
     // Si tout est OK (pas d'erreur)
     if (empty($errors)) {
@@ -56,6 +76,10 @@ if (!empty($_POST)) {
 
         // Message de succès
         $success  = 'Merci de votre inscription';
+        if ($query) {
+            header("Location: success.php");
+            exit;
+          }
     }
 }
 

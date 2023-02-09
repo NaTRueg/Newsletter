@@ -61,11 +61,7 @@
                 </div>
 
                 <div class="field-list">
-
-                <!-- <?php 
-                    if (isset($errors['interest'])) : ?>
-                    <p class="message error"><?= $errors['interest']; ?></p>
-                <?php endif; ?> -->
+                <legend>Centres d'intérêts :</legend> <br>
 
                 <?php foreach ($interestsSelected as $interests) : ?>
 
@@ -73,6 +69,10 @@
                     <label for="interest"><?= $interests['interest_label']; ?></label> <br>
 
                 <?php endforeach; ?>
+
+                <?php if (isset($errors['interests'])) : ?>
+                    <p class="message error"><?= $errors['interests']; ?></p>
+                <?php endif; ?>
                   
                 </div>
                 <input type="submit" value="Valider" class="btn">
