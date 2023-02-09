@@ -50,6 +50,10 @@ if (!empty($_POST)) {
     if (!$email) {
         $errors['email'] = "Merci d'indiquer une adresse mail";
     }
+    
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = "L'adresse email n'est pas valide.";
+      }
 
     if (!$firstName) {
         $errors['Firstname'] = "Merci d'indiquer un prénom";
