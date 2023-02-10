@@ -13,7 +13,17 @@ h3 {
   margin-top: 10em;
 
 }
+
+h2 {
+    
+  font-family: "Consolas", sans-serif;
+  display: flex;
+  justify-content:center;
+  margin-top: 1em;
+  color: #00B200;
+
+}
 </style>
-<h3>Inscription réussie ! :)</h3>';
+<h3>Inscription réussie ! :)</h3><h2>✔</h2>';
 ?>
 
