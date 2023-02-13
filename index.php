@@ -10,9 +10,8 @@ $success = null;
 $email = '';
 $firstName = '';
 $lastName = '';
+$pdo = getPdoConnection();
 
-
-$conn = mysqli_connect(DB_HOST, DB_USER , DB_PASSWORD , DB_NAME );
 
 // Si le formulaire a été soumis...
 if (!empty($_POST)) {
@@ -21,7 +20,6 @@ if (!empty($_POST)) {
     $email = trim($_POST['email']);
     $firstName = trim($_POST['Firstname']);
     $lastName = trim($_POST['Lastname']);
-
     $lastName = ucwords(strtolower($lastName));
     $firstName = ucwords(strtolower($firstName));
 
@@ -35,9 +33,8 @@ if (!empty($_POST)) {
       }
     
     // Vérifiez si un abonné existe déjà avec la même adresse email
-    $query = "SELECT * FROM subscribers WHERE email = '$email'";
 
-    if (checkEmailExistence($email)) {
+    if (checkEmailExistence($pdo , $email)) {
     // L'abonné existe déjà, affichez un message d'erreur
         $errors['email'] = "L'adresse email est déjà utilisée. <br> Veuillez en choisir une autre.";
     } 
@@ -76,7 +73,7 @@ if (!empty($_POST)) {
 
         // Message de succès
         $success  = 'Merci de votre inscription';
-        if ($query) {
+        if ($success ) {
             header("Location: success.php");
             exit;
           }
