@@ -61,20 +61,24 @@
                 </div>
 
                 <div class="field-list">
-                <legend>Centres d'intérêts :</legend> <br>
+                    <legend>Centres d'intérêts :</legend> <br>
 
-                <?php foreach ($interestsSelected as $interests) : ?>
+                    <?php $counter = 0; ?>
+                    <?php foreach ($interestsSelected as $interests) : ?>
+                        <?php $counter++; ?>
 
-                    <input id="interest" type="checkbox" name="interest[]" value="<?= $interests['id']; ?>" >
-                    <label for="interest"><?= $interests['interest_label']; ?></label> <br>
+                        <input id="interest-<?= $counter; ?>" type="checkbox" name="interest[]" value="<?= $interests['id']; ?>" 
+                        <?php if (!empty($_POST['interest']) && in_array($interests['id'], $_POST['interest'])) echo 'checked'; ?>>
+                        <label for="interest-<?= $counter; ?>"><?= $interests['interest_label']; ?></label> <br>
 
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
 
-                <?php if (isset($errors['interests'])) : ?>
-                    <p class="message error"><?= $errors['interests']; ?></p>
-                <?php endif; ?>
-                  
+                    <?php if (isset($errors['interests'])) : ?>
+                        <p class="message error"><?= $errors['interests']; ?></p>
+                    <?php endif; ?>
+
                 </div>
+
                 <input type="submit" value="Valider" class="btn">
             </fieldset>
         </form>

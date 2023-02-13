@@ -36,16 +36,12 @@ if (!empty($_POST)) {
     
     // Vérifiez si un abonné existe déjà avec la même adresse email
     $query = "SELECT * FROM subscribers WHERE email = '$email'";
-    $result = mysqli_query($conn, $query);
 
-    if (mysqli_num_rows($result) > 0) {
-
+    if (checkEmailExistence($email)) {
     // L'abonné existe déjà, affichez un message d'erreur
-
-    $errors['email'] = "L'adresse email est déjà utilisée. <br> Veuillez en choisir une autre.";
-    } else {
-
-
+        $errors['email'] = "L'adresse email est déjà utilisée. <br> Veuillez en choisir une autre.";
+    } 
+    
     // Validation 
     if (!$email) {
         $errors['email'] = "Merci d'indiquer une adresse mail";
@@ -67,7 +63,7 @@ if (!empty($_POST)) {
     if (!isset($interests) || count($interests) == 0) {
         $errors['interests'] = "Merci de choisir au moins un centre d'intérêt.";
     }
-}
+
 
 
     // Si tout est OK (pas d'erreur)

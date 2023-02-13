@@ -1,5 +1,6 @@
 <?php
 
+require 'functions.php';
 require 'config.php';
 
 $filename = $argv[1];
@@ -12,8 +13,17 @@ if (!file_exists($filename)) {
 $file = fopen($filename, "r");
 
 $pdo = getPdoConnection();
-$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$email = $row[2];
+
+$checkStatement = $pdo->prepare("SELECT * FROM subscribers WHERE email = ?");
+$checkStatement->execute([$email]);
+
+if ($checkStatement->rowCount() > 0) {
+    echo "L'email $email est déjà utilisé. Veuillez vérifier le fichier CSV.";
+    exit;
+}
+
 
 $pdoStatement = $pdo->prepare('INSERT INTO subscribers (firstName , lastName, email,interests) VALUES (?,?,?,?)');
 

@@ -54,6 +54,18 @@ function getAllOrigin()
     
 }
 
+function checkEmailExistence(string $email)
+{
+    $pdo = getPdoConnection();
+
+    $sql = 'SELECT COUNT(*) FROM subscribers WHERE email = ?';
+
+    $query = $pdo->prepare($sql);
+    $query->execute([$email]);
+
+    return $query->fetchColumn() > 0;
+}
+
 
 
 /**

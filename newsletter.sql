@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 09, 2023 at 01:34 PM
+-- Generation Time: Feb 13, 2023 at 01:11 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -89,7 +89,10 @@ INSERT INTO `subscribers` (`id`, `createThe`, `email`, `firstName`, `lastName`, 
 (2, NULL, 'b.lav@hotmail.fr', 'Bertrand', 'Lavoisier', NULL),
 (3, NULL, 'SarahLAMINE@gmail.com', 'Sarah', 'Lamine', NULL),
 (4, NULL, 'mo78@laposte.net', 'Mohamed', 'Ben Salam', NULL),
-(5, '2023-02-09', 'test@test.fr', 'Jean', 'Dupont', 2);
+(5, '2023-02-09', 'test@test.fr', 'Jean', 'Dupont', 2),
+(6, '2023-02-13', 'issues@issuestest.com', 'Jean', 'Issues', 1),
+(7, '2023-02-13', 'Thierry@hotmail.fr', 'Thierry', 'Buisson', 3),
+(8, '2023-02-13', 'Essaie@test.com', 'Paul', 'Feuille', 2);
 
 -- --------------------------------------------------------
 
@@ -107,10 +110,19 @@ CREATE TABLE `subscriber_interest` (
 --
 
 INSERT INTO `subscriber_interest` (`subscribers_id`, `interest_id`) VALUES
-(5, 7),
-(5, 1),
-(5, 3),
-(5, 2);
+(6, 4),
+(6, 6),
+(6, 5),
+(6, 7),
+(6, 1),
+(6, 3),
+(6, 2),
+(7, 1),
+(7, 3),
+(7, 2),
+(8, 1),
+(8, 3),
+(8, 2);
 
 --
 -- Indexes for dumped tables
@@ -133,6 +145,7 @@ ALTER TABLE `origin`
 --
 ALTER TABLE `subscribers`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `key` (`origine_id`);
 
 --
@@ -162,7 +175,7 @@ ALTER TABLE `origin`
 -- AUTO_INCREMENT for table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
