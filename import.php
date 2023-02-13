@@ -13,19 +13,24 @@ if (!file_exists($filename)) {
 
 $file = fopen($filename, "r");
 $row = fgetcsv($file);
-$email = $row[2];
 
-if (checkEmailExistence($pdo, $email)) {
-    echo "L'email $email est déjà utilisé. Veuillez vérifier le fichier CSV.";
-    exit;
-}
 
 $pdoStatement = $pdo->prepare('INSERT INTO subscribers (firstName , lastName, email) VALUES (?,?,?)');
+
 while ($row = fgetcsv($file)) {
+    $email = $row[2];
+
+    if (checkEmailExistence($pdo, $email)) {
+        echo "L'email $email est déjà utilisé." . PHP_EOL;
+        continue  ;
+        
+        
+    } 
+
     $firstName = ucfirst($row[0]);
     $lastName = ucfirst($row[1]);
-    $email = $row[2];
-    $pdoStatement->execute([$firstName, $lastName,$email]);
+
+    $pdoStatement->execute([$firstName, $lastName, $email]);
 }
 
 echo 'Import terminé!';
